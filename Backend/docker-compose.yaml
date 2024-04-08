@@ -1,0 +1,61 @@
+version: "3"
+
+services:
+  customer-support:
+    build:
+      context: ./customerSupport
+      dockerfile: customerDocker
+    restart: always
+    ports:
+      - "3001:3001"
+    
+
+  
+    # service1 configurations...
+
+  ecommerce-service:
+    build: 
+      context: ./eCommerse
+      dockerfile: ecommerseDocker
+    restart: always
+    ports:
+      - "3002:3002"
+  
+
+  order-service:
+    build: 
+      context: ./order
+      dockerfile: ./orderDocker
+    restart: always
+    ports:
+      - "3003:3003"
+
+
+  payment-service:
+    build: 
+      context: ./payment
+      dockerfile: paymentDocker
+    restart: always
+    ports:
+      - "3004:3004"
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - "./data:/data/db"  
+
+  rabbitmq:
+    image: rabbitmq:3.8.25-management-alpine
+    hostname: rabbitmq
+    ports:
+      - 5673:5673
+      - 15673:15673
+    volumes:
+      - ./rabbitmq/data/:/var/lib/rabbitmq/
+      - ./rabbitmq/log/:/var/log/rabbitmq/
+    expose:
+      - 5673
+      - 15673
