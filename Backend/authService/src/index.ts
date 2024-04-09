@@ -8,6 +8,10 @@
     const app: Express = express();
     const port = process.env.PORT || 3000;
 
+
+    app.use(express.json());
+
+    app.use("/api",router)
 async function conn(){
     try{
         await mongoose.connect("mongodb://localhost/auth-service")
@@ -15,7 +19,7 @@ async function conn(){
 
     }
     catch(e:any){
-  console.log("jthy ur")
+        console.log("jthy ur")
     }
 
 }

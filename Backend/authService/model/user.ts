@@ -1,10 +1,13 @@
 import mongoose, { Schema } from "mongoose"
 
 
-const UserSchema=new Schema({
-    name:{type:String},
-    email:{type:String},
-    password:{type:String},
+const OrderSchema=new Schema({
+   products:[
+    {
+        product_id:String
+    }
+   ],
+   user:String,
     create_At:{
         type:Date,
         default:Date.now()
@@ -12,6 +15,6 @@ const UserSchema=new Schema({
 })
 
 
-const User =mongoose.model("user",UserSchema)
+const User =mongoose.model("user",OrderSchema)
 
 export default User
